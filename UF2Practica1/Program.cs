@@ -9,9 +9,12 @@ namespace UF2Practica1
 {
 	class MainClass
 	{
-		//Valors constants
-		#region Constants
-		const int nCaixeres = 3;
+        //Valors constants
+        #region Constants
+        const int numCaixeres = 3;
+        #endregion
+        #region Constants
+        const int nCaixeres = 3;
 
 		#endregion
 		/* Cua concurrent
@@ -58,7 +61,13 @@ namespace UF2Practica1
 
 			// Instanciar les caixeres i afegir el thread creat a la llista de threads
 
-
+            for (var i =0;i<numCaixeres;i++)
+            {
+                var caixera = new Caixera(i);
+                var thread = new Thread(() => caixera.ProcessarCua());
+                thread.Start();
+                threads.Add(thread);
+            }
 
 
 			// Procediment per esperar que acabin tots els threads abans d'acabar
@@ -73,26 +82,34 @@ namespace UF2Practica1
 			Console.ReadKey();
 		}
 	}
-	#region ClassCaixera
-	public class Caixera
+     #region ClassCaixera
+    public class Caixera
 	{
 		public int idCaixera
 		{
 			get;
 			set;
 		}
-
-		public void ProcessarCua()
+        public Caixera(int id)
+        {
+            idCaixera = id + 1;
+        }
+        public void ProcessarCua()
 		{
-			// Llegirem la cua extreient l'element
-			// cridem al mètode ProcesarCompra passant-li el client
+            // Llegirem la cua extreient l'element
+            // cridem al mètode ProcesarCompra passant-li el client
+            Client client = null;
+            while (MainClass.cua.TryDequeue(out client))
+            {
+                ProcesarCompra(client);
+            }
+
+        
+
+    }
 
 
-
-		}
-
-
-		private void ProcesarCompra(Client client)
+        private void ProcesarCompra(Client client)
 		{
 
 			Console.WriteLine("La caixera " + this.idCaixera + " comença amb el client " + client.nom + " que té " + client.carretCompra + " productes");
@@ -114,11 +131,10 @@ namespace UF2Practica1
 	}
 
 
-	#endregion
+    #endregion
+    #region #region ClassClient
 
-	#region ClassClient
-
-	public class Client
+    public class Client
 	{
 		public string nom
 		{
