@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 using System.IO;
 
 namespace UF2Practica1
-{
+{ 
 	class MainClass
 	{
         //Valors constants
