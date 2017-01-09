@@ -103,9 +103,6 @@ namespace UF2Practica1
             {
                 ProcesarCompra(client);
             }
-
-        
-
     }
 
 
