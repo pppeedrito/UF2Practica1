@@ -13,10 +13,7 @@ namespace UF2Practica1
         #region Constants
         const int numCaixeres = 3;
         #endregion
-        #region Constants
-        const int nCaixeres = 3;
-
-		#endregion
+        
 		/* Cua concurrent
 		 	Dos mètodes bàsics: 
 		 		Cua.Enqueue per afegir a la cua
